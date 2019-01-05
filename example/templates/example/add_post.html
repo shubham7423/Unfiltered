@@ -1,0 +1,33 @@
+{% extends 'example/base.html' %}
+{% block post_active %}active{% endblock %}
+{% block body %}
+
+  <div class="card my-4">
+    <form class="" action="{% url 'example:create_post' %}" method="post">
+      {% csrf_token %}
+      <h5 class="card-header">Add Post</h5>
+      <div class="card-body">
+        Catagory: <select class="" name="catagory" required>
+
+            <option value="depression">depression</option>
+            <option value="anxiety">Anxiety</option>
+            <option value="relationship">Relationship Problems</option>
+
+        </select><br><br>
+        <input type="text" class="form-control"  name="title" placeholder="Title" value="" required><br>
+        <div class="input-group">
+
+          <!--<input type="text" class="form-control" placeholder="Search for...">-->
+          <textarea rows="4" class="form-control" cols="50" name="content" placeholder="Content" required></textarea>
+
+        </div><br>
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-secondary" style="text-align:center" type="button">Post</button>
+        </span>
+      </div>
+    </form>
+
+  </div>
+
+
+{% endblock %}

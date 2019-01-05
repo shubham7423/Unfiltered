@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+  <body>
+    <form class="form-horizontal" action='' method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Register</legend>
+    </div>
+
+    <form method="post" >
+        {% csrf_token %}
+
+
+           {% for field in form %}
+
+               <div class="control-group">
+                 <!-- Username -->
+                 <label class="control-label" >{{ field.label_tag }}</label>
+                 <div class="controls">
+                   {{ field }}
+                   {% if field.help_text %}
+
+                     <p class="help-block">{{ field.help_text }}</p>
+                   {% endif %}
+                   {% for error in field.errors %}
+                     <p style="color: red">{{ error }}</p>
+                   {% endfor %}
+                   {% if messages %}
+                      <ul>
+                          {% for message in messages %}
+                          <li><p style="color: red">{{ message }}</p></li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}
+                 </div>
+               </div>
+       {% endfor %}
+    </form>
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <input type="submit" class="btn btn-success"></button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+  </body>
+</html>

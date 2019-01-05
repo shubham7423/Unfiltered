@@ -1,0 +1,142 @@
+{% extends 'example/base.html' %}
+{% block home_active %}active{% endblock %}
+{% block body %}
+  {% csrf_token %}
+
+  <div class="container">
+
+    <div class="row">
+
+
+           {% if messages %}
+           <div class="row">
+             <div class="col-xs-12">
+
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+
+             </div>
+           </div>
+        {% endif %}
+
+
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">{{ cat }}</h1>
+
+        <!-- Blog Post -->
+
+        {% for p in posts %}
+
+
+          <a href="{% url 'example:detail' p.id %}" style="color:black;text-decoration: none;">
+            <div class="card mb-4">
+
+              <div class="card-body">
+                <h2 class="card-title">{{ p.post_title }}</h2>
+                <p class="card-text">{{ p.content }}</p>
+                {% if cuser == p.user %}
+                  <!--button class="btn" onclick="url ''"><i class="fa fa-trash"></i></button-->
+                  <a href="{% url 'example:delete_post' p.id %}">Delete</a>
+                  <a href="{% url 'example:edit_post' p.id %}">Edit</a>
+                {% endif %}
+              </div>
+              <div class="card-footer text-muted">
+                {{ p.created_at }}
+
+              </div>
+            </div>
+          </a>
+
+        {% endfor %}
+
+
+
+        <!-- Pagination -->
+        <!--ul class="pagination justify-content-center mb-4">
+          <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+          </li>
+        </ul-->
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+        <!--button style="margin-top:20px;" type="button" onclick="{% url 'example:create_post' %}" name="button">Add Post</button-->
+
+
+
+
+        <!-- Search Widget -->
+        <!--div class="card my-4">
+          <h5 class="card-header">Search</h5>
+          <div class="card-body">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for..." name="q">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div-->
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="{% url 'example:detailed_cat' 'depression' %}">Depression</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'example:detailed_cat' 'relationship' %}">Relationship</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'example:detailed_cat' 'anxiety' %}">Anxiety</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <!--<li>
+                    <a href="#">JavaScript</a>
+                  </li>
+                  <li>
+                    <a href="#">CSS</a>
+                  </li>
+                  <li>
+                    <a href="#">Tutorials</a>
+                  </li>-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <!--div class="card my-4">
+          <h5 class="card-header">Side Widget</h5>
+          <div class="card-body">
+            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+          </div>
+        </div-->
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+{% endblock %}
+s

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load staticfiles %}
+    <link href="{% static 'example/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'example/blog-home.css' %}" rel="stylesheet">
+    <link href="{% static 'example/css/blog-post.css' %}" rel="stylesheet">
+    <style>
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: RoyalBlue;
+}
+</style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Unfiltered</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% block home_active %}{% endblock %}">
+              <a class="nav-link " href="{% url 'example:welcome' %}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item {% block post_active %}{% endblock %}">
+              <a class="nav-link" href="{% url 'example:create_post' %}">Create Post</a>
+            </li>
+            <li class="nav-item {% block dashboard_active %}{% endblock %}">
+              <a class="nav-link" href="{% url 'example:dashboard' %}">Dashboard</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'example:log_out' %}">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>
